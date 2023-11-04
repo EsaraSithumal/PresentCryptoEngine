@@ -27,6 +27,7 @@
 
 module PRESENT_ENCRYPT (
         output [63:0] odat,   // data output port
+        output        done,
         input  [63:0] idat,   // data input port
         input  [79:0] key,    // key input port
         input         load,   // data load command
@@ -69,6 +70,7 @@ PRESENT_ENCRYPT_PBOX UPBOX    ( .odat(dat3), .idat(dat2) );
 // instantiate substitution box (s-box) for key expansion
 PRESENT_ENCRYPT_SBOX USBOXKEY ( .odat(kdat2[79:76]), .idat(kdat1[79:76]) );
 
+assign done = (round==0)?1:0;
 
 //---------sequential processes----------
 
@@ -98,6 +100,12 @@ begin
    else
       round <= round + 1;
 end
+
+//done signal
+// always @(posedge clk)
+// begin
+   
+// end
 
 //-------------------Debug stuff -------------------
 

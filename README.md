@@ -18,3 +18,8 @@ The original reference paper describing the PRESENT algorithm in full detail is 
 
 A. Bogdanov, L. R. Knudsen, G. Leander, C. Paar, A. Poschmann, M. J. B. Robshaw, Y. Seurin and
 C. Vikkelsoe. PRESENT: An Ultra-Lightweight Block Cipher. CHES Conference 2007.
+
+
+compile: iverilog -o compiled .\present_encrypt_pbox.v .\present_encrypt.v .\present_encrypt_tb.v .\present_encrypt_sbox.v
+run: vvp compiled
+wavefile: gtkwave wave.vcd

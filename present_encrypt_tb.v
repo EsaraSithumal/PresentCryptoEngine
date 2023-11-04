@@ -44,17 +44,21 @@ module PRESENT_ENCRYPT_TB;
    reg load        = 1'b0;
    reg clk         = 1'b0;
    reg reset       = 1'b0;
+   wire done;
 
    // instantiate design under test
-   PRESENT_ENCRYPT dut(odat,idat,key,load,clk);
+   PRESENT_ENCRYPT dut(.odat(odat), .done(done), .idat(idat), .key(key), .load(load), .clk(clk));
 
    // clock generator
    always  #5 clk = ~clk;
 
 
    //
-   initial
-   begin
+   initial begin
+
+      $dumpfile("wave.vcd");
+      $dumpvars(0,PRESENT_ENCRYPT_TB);
+
       #10   load = 1'b1; idat = `PLAINTEXT0; key = `KEY0;
       #10   load = 1'b0;
       #400  load = 1'b1; idat = `PLAINTEXT1; key = `KEY0;
